@@ -1,7 +1,7 @@
 int incomingByte = 0;
 void setup() {
-  Serial.begin(115200);
-  pinMode(13, OUTPUT);
+  Serial.begin(115200); // setup window
+  pinMode(13, OUTPUT); //setup led pins
   pinMode(12, OUTPUT);
   pinMode(11, OUTPUT);
   pinMode(10, OUTPUT);
@@ -10,13 +10,13 @@ void setup() {
 void loop() {
 
   if (Serial.available() > 0) {
-    incomingByte = Serial.read();
-    int val = incomingByte - 88;
+    incomingByte = Serial.read(); // read from window
+    int val = incomingByte - 88; // pin in use
     Serial.print("I received: ");
     Serial.print((char)incomingByte);
-    if (val <= 13 && val >= 9) {
+    if (val <= 13 && val >= 9) { // led turn on
       digitalWrite(val, HIGH);
-    } else {
+    } else {                    // led turn off
       digitalWrite(9, LOW);
       digitalWrite(10, LOW);
       digitalWrite(11, LOW);
