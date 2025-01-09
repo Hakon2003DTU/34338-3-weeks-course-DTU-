@@ -20,6 +20,8 @@ void loop() {
   Serial.print("voltage:");
   Serial.print(voltage,3);
   Serial.print("Tempreture value:");
-  Serial.println(Tempreture) ;
+  Serial.print(Tempreture);
+  Serial.print("\xC2\xB0"); // shows degree symbol
+  Serial.println("C");
   delay(10);
 }
