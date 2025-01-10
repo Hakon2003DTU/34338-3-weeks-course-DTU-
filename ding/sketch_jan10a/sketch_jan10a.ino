@@ -41,6 +41,16 @@ Serial.print(p->feed);
 Serial.println();
 }
 
+void SwapAnimal (struct FARM *a, struct FARM *b) {
+struct FARM temp;
+temp=*a; 
+*a = *b; 
+*b = temp; 
+}
+
+
+
+
 
 
 void loop() {
@@ -53,15 +63,18 @@ delay(2000);
 display(&F2);
 
 delay(2000);
-display(&F3);
+
+
+SwapAnimal(&F1,&F2);
+
+
+
+display(&F1);
 
 delay(2000);
-display(&F4);
-
-delay(2000);
-display(&F5);
+display(&F2);
 
 delay(2000);
 
-
+delay(10000);
 }
