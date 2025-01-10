@@ -1,8 +1,8 @@
-
+// struct setup to only be read once
 struct FARM {   // Structure declaration
-  String animal;           // Member (int variable)
+  String animal;           // Members 
   int age;
-  float weight;       // Member (char variable)
+  float weight;       
   int lifeexp;
   char feed[20];
 }; // End the structure with a semicolon
@@ -12,14 +12,11 @@ struct FARM F3 = {"chicken", 1, 4, 15, "corn"};
 struct FARM F4 = {"Horse", 10, 750, 17, "Hay"};
 struct FARM F5 = {"Dog", 8, 30, 15, "dog food"};
 void setup() {
-  // put your setup code here, to run once:
 Serial.begin(9600); // enable serial moniter 
-
-
 }
 
 
-
+// function for animal to be displayed on LCD
 void display(struct FARM *p){
   Serial.print("Animal: ");
 Serial.print(p->animal);
@@ -41,6 +38,7 @@ Serial.print(p->feed);
 Serial.println();
 }
 
+//swab function
 void SwapAnimal (struct FARM *a, struct FARM *b) {
 struct FARM temp;
 temp=*a; 
@@ -49,30 +47,25 @@ temp=*a;
 }
 
 
-
-
-
-
 void loop() {
-  // put your main code here, to run repeatedly:
 
 
-display(&F1);
-
-delay(2000);
-display(&F2);
+display(&F1); // display animal 1
 
 delay(2000);
-
-
-SwapAnimal(&F1,&F2);
-
-
-
-display(&F1);
+display(&F2); // display animal 2
 
 delay(2000);
-display(&F2);
+
+
+SwapAnimal(&F1,&F2); // swab animal 1 and animal 2
+
+
+
+display(&F1); // display animal 1
+
+delay(2000);
+display(&F2); // display animal 2
 
 delay(2000);
 
