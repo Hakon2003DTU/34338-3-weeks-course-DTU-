@@ -1,3 +1,13 @@
+/**
+ * @file EX12.f.ino
+ * @author Hakon, Sørenand Anel (you@domain.com)
+ * @brief 
+ * @version 0.1
+ * @date 2025-01-10
+ * 
+ * @copyright Copyright (c) 2025
+ * 
+ */
 #include <LiquidCrystal.h>
 
 const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
@@ -20,11 +30,16 @@ int LEDPin5=10;
 //button pin used 
 int ButtonPin=13;
 
+
+/**
+ * @brief no inputs and enables the LCD display, serial monitor, sets LEDS as outputs and button pin enables pullup resistors   
+ * 
+ */
 void setup() {
   // set up the LCD's number of columns and rows:
   lcd.begin(16, 2);
   Serial.begin(115200);// enable serial monitor
-  
+
   pinMode(LEDPin1, OUTPUT);//setup led pins
   pinMode(LEDPin2, OUTPUT);//setup led pins
   pinMode(LEDPin3, OUTPUT);//setup led pins
@@ -33,7 +48,10 @@ void setup() {
   pinMode(ButtonPin, INPUT_PULLUP); // setup button pin
 }
 
-
+/**
+ * @brief Checks if the button is pressed and desides if it is a hit or miss. Desides which pattern to run on the LEDS (One after another or Random).  
+ * 
+ */
 void loop() {
 
 BTNstate = !digitalRead(ButtonPin);
@@ -58,17 +76,17 @@ else if (hits> 7){
 count++;
 delayMicroseconds(1000-(50*hits));
 
-if (hits==10){
+if (hits==10){ // wining seuence 
   lcd.clear();
   lcd.setCursor(0,0);
   lcd.print("You WIN");
   
-  for(int i=0 ; i < 100; i++){
+  for(int i=0 ; i < 100; i++){ // flashes the lights in pattern to show win 
     FLOW();
   }
   
 }
-else if (count==301){
+else if (count==301){ // prints out hit and misses after the perioder where hit and misses can change 
   lcd.setCursor(1,0);
   lcd.print("misses:");
   lcd.print(misses);
@@ -80,6 +98,11 @@ count=count%500;
 
 }
 
+
+/**
+ * @brief no inputs makes the LEDs og random 
+ * 
+ */
 void RandomLED(){
     if (count%100==0){
       digitalWrite(LED, LOW);
@@ -90,6 +113,10 @@ void RandomLED(){
 
 }
 
+/**
+ * @brief no inputs. Running the LEDS on after another depending on count
+ * 
+ */
 void normalLED(){
   if(count >= 1 && count <= 100){
           digitalWrite(LEDPin1, HIGH);
@@ -117,6 +144,10 @@ if(count >= 401 && count <= 500){
 
 }
 
+/**
+ * @brief Makes the LED go in a pattern to show that the corect LED has been hit
+ * 
+ */
 void FLOW(){          
           digitalWrite(LEDPin1, LOW);
           digitalWrite(LEDPin2, LOW);
@@ -150,6 +181,10 @@ void FLOW(){
           delay(100);
 }
 
+/**
+ * @brief No Input. turns all LEDS off.
+ * 
+ */
 void OFF(){
           digitalWrite(LEDPin1, LOW);
           digitalWrite(LEDPin2, LOW);
